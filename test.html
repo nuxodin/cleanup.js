@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang=en>
+    <meta charset=utf-8>
+    <meta name="viewport" content="width=device-width">
+    <title>dump.js test</title>
+<body>
+
+<div id=out></div>
+
+<script type=module>
+import './mod.js';
+
+console.log(document.all);
+console.log(window.captureEvents);
+console.log(document.__proto__); // does not work...!?
+
+</script>

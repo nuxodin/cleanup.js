@@ -532,7 +532,16 @@ function remove(tree, root){
     for (let prop in tree) {
         if (!(prop in root)) continue;
         if (tree[prop] === 1) {
-            delete root[prop]
+
+            Object.defineProperty(root, prop, {
+                get:function(){
+                    console.error('cleanupjs: ' + prop + ' is removed!');
+                },
+                set:function(){
+                    console.error('cleanupjs: ' + prop + ' is removed!');
+                }
+            });
+            //delete root[prop]
         } else {
             remove(tree[prop], root[prop]);
         }
