@@ -1,5 +1,8 @@
-//
-// todo? https://developer.apple.com/documentation/webkit/deprecated_symbols/document_object_models_api_legacy
+// Resources:
+// https://dev.w3.org/html5/pf-summary/obsolete.html
+// https://www.powermapper.com/products/sortsite/rules/w3cdepr/
+// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Deprecated_and_obsolete_features
+// https://developer.apple.com/documentation/webkit/deprecated_symbols/document_object_models_api_legacy
 
 const tree = {
     window:{
@@ -13,6 +16,9 @@ const tree = {
         MutationEvent:1,
         HTMLMarqueeElement:1,
         HTMLAllCollection:1,
+        HTMLDirectoryElement:1,
+        HTMLFontElement:1,
+        HTMLFrameElement:1,
         PluginArray:1,
         Plugin:1,
         WebKitMutationObserver:1,
