@@ -199,6 +199,11 @@ const tree = {
             wheelDeltaY:1,
         }
     },
+    Range:{
+        prototype:{
+            compareNode:1,
+        }
+    },
     CSS2Properties:{
         prototype:{
             MozBoxDirection:1,
