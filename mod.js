@@ -186,6 +186,17 @@ const tree = {
             initUIEvent:1,
         }
     },
+    KeyboardEvent:{
+        prototype:{
+            initKeyEvent:1,
+            initKeyboardEvent:1,
+            charCode:1,
+            keyCode:1,
+            keyIdentifier:1,
+            which:1,
+            char:1,
+        }
+    },
     MouseEvent:{
         prototype:{
             initMouseEvent:1,
