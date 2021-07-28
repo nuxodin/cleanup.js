@@ -138,6 +138,9 @@ const tree = {
             mozMatchesSelector:1,
             webkitMatchesSelector:1,
             mozRequestFullScreen:1,
+            setCapture:1,
+            scrollLeftMax:1,
+            scrollTopMax:1,
         }
     },
     HTMLElement:{
