@@ -184,6 +184,9 @@ const tree = {
     Event:{
         prototype:{
             initEvent:1,
+            cancelBubble:1,
+            returnValue:1,
+            srcElement:1,
         }
     },
     UIEvent:{
