@@ -558,23 +558,35 @@ const tree = {
 }
 
 
-function remove(tree, root){
+function check(tree, root){
     for (let prop in tree) {
         if (!(prop in root)) continue;
         if (tree[prop] === 1) {
-
+            let discriptor = Object.getOwnPropertyDescriptor(root, prop);
             Object.defineProperty(root, prop, {
                 get:function(){
-                    console.error('cleanupjs: ' + prop + ' is removed!');
+                    console.error('🚮 cleanup.js: ' + prop + ' should not be used!');
+                    if (discriptor.value) return discriptor.value;
+                    return discriptor.get.call(this);
                 },
-                set:function(){
-                    console.error('cleanupjs: ' + prop + ' is removed!');
-                }
+                set:function(value){
+                    console.error('🚮 cleanup.js: ' + prop + ' should not be used!');
+                    if (discriptor.set) discriptor.set.call(this, value);
+                },
+                enumerable:false,
             });
-            //delete root[prop]
-        } else {
-            remove(tree[prop], root[prop]);
+        } else { // reqursive
+            check(tree[prop], root[prop]);
         }
     }
 }
-remove(tree, window);
+check(tree, window);
+
+
+
+
+/* html lint */
+let link = document.createElement('link');
+link.rel = 'stylesheet';
+link.href = './html-lint.css';
+document.head.prepend(link);
