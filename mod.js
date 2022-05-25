@@ -588,5 +588,5 @@ check(tree, window);
 /* html lint */
 let link = document.createElement('link');
 link.rel = 'stylesheet';
-link.href = './html-lint.css';
+link.href = import.meta.url + '/../html-lint.css';
 document.head.prepend(link);
