@@ -5,6 +5,11 @@
 /* By Geoffrey Crofte */
 /* input:not([id]), label:not([for]), */
 
+/* <img> and <iframe>'s without native lazy loading */
+/* By Jay Holtslander
+img:not([loading="lazy"]),
+iframe:not([loading="lazy"]),
+*/
 
 /* Links go nowhere? */
 /* This selector hunts for links that have:
@@ -82,11 +87,6 @@ h6 ~ h5:first-of-type,
 /* Find <picture> elements that don't contain a webp <source> */
 /* By Jay Holtslander */
 picture > source:first-child:not([type="image/webp"]):before,
-
-/* <img> and <iframe>'s without native lazy loading */
-/* By Jay Holtslander */
-img:not([loading="lazy"]),
-iframe:not([loading="lazy"]),
 
 /* Prevents the absence of lang attribute */
 /* By Geoffry Crofte */
