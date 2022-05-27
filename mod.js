@@ -556,7 +556,11 @@ const tree = {
     }
 
 }
-
+/* does not work.. :( https://stackoverflow.com/questions/19775573/override-element-stylesheet-csstext
+tree.window.CSSStyleDeclaration = {
+    prototype:tree.window.CSS2Properties
+};
+*/
 
 function check(tree, root){
     for (let prop in tree) {

@@ -1,11 +1,6 @@
 <!DOCTYPE html>
-<html lang=en>
-    <meta charset=utf-8>
-    <meta name="viewport" content="width=device-width">
-    <title>dump.js test</title>
+<html>
 <body>
-
-<div id=out></div>
 
 <script type=module>
 import './mod.js';
@@ -14,12 +9,10 @@ console.log(document.all);
 console.log(window.captureEvents);
 console.log(document.head.style['-moz-box-direction']);
 console.log(document.head.style.MozHyphens);
+console.log(document.head.style.WebkitTransform);
+console.log(document.head.style['-webkit-mask-position']);
+
 console.log(''.substr(1));
-
-
-
-
-
 //console.log(document.__proto__); // does not work...!?
 
 
@@ -34,3 +27,20 @@ console.log(''.substr(1));
 <img         width="20" height="20" loading="lazy">
 
 <button></button>
+<button aria-label="test"></button>
+
+<table></table>
+
+
+<label>
+    Label
+    <input>
+</label>
+
+<label for="inp">Label</label>
+<input id="inp">
+
+
+<input aria-label="test">
+
+<input>

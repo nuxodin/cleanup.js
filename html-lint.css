@@ -1,45 +1,75 @@
 /* https://github.com/lorenzodelijser/lint-html-with-css */
 
-/* Debug inputs and lebels without id or for attribute */
-/* Are you sure your code is ok? Explicit relation between an input and its label is always better. Use id and for attributes to do so. */
-/* By Geoffrey Crofte */
-/* input:not([id]), label:not([for]), */
 
-/* <img> and <iframe>'s without native lazy loading */
-/* By Jay Holtslander
-img:not([loading="lazy"]),
-iframe:not([loading="lazy"]),
+/***********************************************************************************************************************
+ *
+ *  Structural nonsens / forbidden
+ *
+ **********************************************************************************************************************/
+
+/* empty makes no sense */
+:is(table,tbody,thead,tfoot,tr,select):empty,
+
+/* required parents */
+:not(figure) > figcaption,
+:not(dl) > :is(dt, dd),
+:not(select) > :is(option, optgroup),
+:not(ul, ol) > li,
+
+/* allowed children */
+:is(ul, ol, menu) > :not(li,script,template),
+
+/* <legend> must be the first child of fieldset */
+fieldset > legend:not(:first-child),
+fieldset > :first-child:not(legend),
+:not(fieldset) > legend,
+
+/* <summary> must be the first child of details */
+details > :first-child:not(summary),
+details > summary:not(:first-child),
+:not(details) > summary,
+
+/* <summary> must be the first child of details */
+/* table > :first-child:not(caption),  /* not require but a best practice? */
+table > caption:not(:first-child),
+:not(table) > caption,
+
+
+/*
+Phrasing content:
+    abbr,audio,b,bdo,br,button,canvas,cite,code,data,datalist,dfn,em,embed,i,iframe,img,input,kbd,label,mark,math,meter,noscript,object,output,picture,progress,q,ruby,samp,script,select,small,span,strong,sub,sup,svg,textarea,time,u,var,video,wbr
+Phrasing content width exeptions:
+    a,area,del,ins,link,map,meta
 */
 
+/* no block elements inside inline elements */
+:is(a,abbr,acronym,b,bdi,bdo,big,br,cite,code,del,dfn,em,i,ins,kbd,mark,math,nobr,q,rb,rp,rt,rtc,ruby,s,samp,small,span,strong,sub,sup,time,tt,var)
+    > :is(address,article,aside,blockquote,details,dialog,dd,div,dl,dt,fieldset,figcaption,figure,footer,form,h1,h2,h3,h4,h5,h6,header,hgroup,hr,main,menu,nav,ol,p,pre,section,table,ul),
+
+/* contains phrasing content */
+:is(p) :not(a,area,del,ins,link,map,meta, abbr,audio,b,bdo,br,button,canvas,cite,code,data,datalist,dfn,em,embed,i,iframe,img,input,kbd,label,mark,math,meter,noscript,object,output,picture,progress,q,ruby,samp,script,select,small,span,strong,sub,sup,svg,textarea,time,u,var,video,wbr),
+
+
+
+/***********************************************************************************************************************
+ *
+ *  Attributes missing / wrong / nonsens
+ *
+ **********************************************************************************************************************/
+
+ /* Prevents the absence of lang attribute */
+/* By Geoffry Crofte */
+html:not([lang])::before,
+
+/* Mismatched [dir] && [lang] */
+/* By Adam Argyle */
+[dir="rtl"]:not([lang="ar"], [lang="he"]),
+:is([lang="ar"], [lang="he"]):not([dir="rtl"]),
+:is([lang="ar"], [lang="he"]) [lang]:not([dir="ltr"]),
+
 /* Links go nowhere? */
-/* This selector hunts for links that have:
-- No href
-- an empty href
-- a "#" href (button parhaps?) */
 /* By Adam Argyle */
 a:is(:not([href]), [href=""], [href="#"]),
-
-
-/* Image without alt attribute? */
-/* Debug images without alt attribute with CSS. */
-/* By Geoffrey Crofte */
-img:not([alt]),
-
-
-/* This selector hunts for forbidden nesting */
-/* By Adam Argyle */
-:not(figure) > figcaption,
-:not(fieldset) > legend,
-:not(dl) > :is(dt, dd),
-:not(tr) > :is(td, th),
-:not(select) > :is(option, optgroup),
-:not(table) > :is(thead, tfoot, tbody, tr, colgroup, caption),
-
-
-/* Only <li>'s allowed here! */
-/* This selector hunts for lists that have something other than an <li> inside */
-/* By Adam Argyle */
-:is(ul, ol) > :not(li),
 
 /* this selector hunts for elements with a tabindex other than 0 or -1 */
 /* values other than 0 or -1 can steal or disrupt natural tab order and is generally something to avoid */
@@ -47,23 +77,26 @@ img:not([alt]),
 [tabindex]:not([tabindex="0"],[tabindex="-1"]),
 
 
-/* Debugs buttons without type attribute, with CSS */
-/* Non-explicit type leads to button being a submit button. Not all buttons are submit buttons. A neutral type would be type="button" */
-/* By Adam Argyle */
-/* button:not([type]), */
+/***********************************************************************************************************************
+ *
+ *  Deprecations
+ *
+ **********************************************************************************************************************/
+
+/* deprecated elements */
+
+acronym,applet,basefont,bgsound,big,blink,center,command,content,dir,font,frame,frameset,hgroup,image,keygen,marquee,menuitem,nobr,noembed,noframes,param,plaintext,rb,rtc,shadow,spacer,strike,tt,xmp,
+input:is([type=submit],[type=button],[type=reset]), /* ok, not deprecated but button elements are better */
 
 
-/* Find all the input fields without any labelling */
-/* By Tanisha Sabherwal */
-input:not([type="button"],[type="reset"],[type="submit"],[arialabelledby],[id]),
-textarea:not([aria-labelledby],[id])
+/***********************************************************************************************************************
+ *
+ *  Accessibility
+ *
+ **********************************************************************************************************************/
 
-
-/* Tables should have a caption */
-/* This one is useful to force each <caption> to be the first direct child of a <table> elements. */
-/* By Quentin Bellanger */
-table > *:first-child:not(caption),
-
+ /* heading should not be inside a or label elements. See: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/label#headings */
+:is(a,label) :is(h1,h2,h3,h4,h5,h6),
 
 /* Headers out of order (i.e. h2 before h1, etc.) */
 /* By Una Kravets */
@@ -84,71 +117,52 @@ h6 ~ h4:first-of-type,
 h6 ~ h5:first-of-type,
 
 
-/* Find <picture> elements that don't contain a webp <source> */
-/* By Jay Holtslander */
-picture > source:first-child:not([type="image/webp"]):before,
+ /***********************************************************************************************************************
+ *
+ *  Accessibility: labeling
+ *
+ **********************************************************************************************************************/
 
-/* Prevents the absence of lang attribute */
-/* By Geoffry Crofte */
-html:not([lang])::before,
+/* Image without alt attribute? */
+img:not([alt]),
+
+/* Empty buttons or links without any kind of labelling */
+/* By Geoffrey Crofte */
+:is(button, a):not([aria-label],[aria-labelledby]):empty,
+:is(button, a):not([aria-label],[aria-labelledby]) > :is(img,svg):only-child:is(:not([alt]),[alt=""]),
+
 
 /* SVG without focusable=false when decorative or hidden */
 /* By Geoffry Crofte */
 svg:is([role="presentation"], [aria-label], [aria-labelledby], [aria-hidden="true"]):not([focusable="false"]),
 
-
-/* Mismatched [dir] && [lang] */
-/* By Adam Argyle */
-[dir="rtl"]:not([lang="ar"], [lang="he"]),
-:is([lang="ar"], [lang="he"]):not([dir="rtl"]),
-:is([lang="ar"], [lang="he"]) [lang]:not([dir="ltr"]),
-
-
 /* SVG without title or aria-label and not considered as decorative */
 /* By Geoffrey Crofte */
 svg:not([role="presentation"],[aria-label],[aria-labelledby]) > :first-child:not(title),
 
-
-/* Summary must be the first child */
-/* By Adam Argyle */
-details > summary:not(:first-child),
-details > :first-child:not(summary),
-
-
-/* Fieldset where legend isn't the first child */
-/* By Geoffrey Crofte */
-fieldset > :first-child:not(legend),
-
-/* No divs inside inline elements */
-/* By Adam Argyle */
-:is(b,i,q,em,abbr,cite,code,span,small,label,strong) > div,
-
-/* heading should not be inside a or label elements. See: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/label#headings */
-:is(a,label) :is(h1,h2,h3,h4,h5,h6),
-
-/* <img> without height and width that will cause cumulative layout shift. See: https://web.dev/optimize-cls/#images-without-dimensions */
-/* By Jay Holtslander */
-img:not([width]),
-img:not([height]),
-
-/* deprecated elements */
-acronym,applet,basefont,bgsound,big,blink,center,content,dir,font,frame,frameset,hgroup,image,keygen,marquee,menuitem,nobr,noembed,noframes,param,plaintext,rb,rtc,shadow,spacer,strike,tt,xmp,
-
-/* Not utilizing srcset for responsive images. See: https://html.com/attributes/img-srcset/ */
-/* By Jay Holtslander */
-/* img:not([srcset]),
-
-/* Empty buttons or links without any kind of labelling */
-/* By Geoffrey Crofte */
-
-:is(button, a):not([aria-label],[aria-labelledby]):empty,
-:is(button, a):not([aria-label],[aria-labelledby]) > :is(img,svg):only-child:is(:not([alt]),[alt=""]),
-
-/* Find all the buttons without any label */
+/* Find all the input fields without any labelling */
 /* By Tanisha Sabherwal */
-input:is([type=button],[type=reset],[type=submit]):not([aria-label]),
-/* button:not([aria-label]), */
+:is(input,textarea,select):not(label :is(input,textarea,select), [id], [aria-labelledby], [aria-label]),
 
+
+/* Tables should have a caption */
+/* This one is useful to force each <caption> to be the first direct child of a <table> elements. */
+/* By Quentin Bellanger */
+
+/* Debug inputs and lebels without id or for attribute */
+/* Are you sure your code is ok? Explicit relation between an input and its label is always better. Use id and for attributes to do so. */
+/* By Geoffrey Crofte */
+/* input:not([id]), label:not([for]), */
+
+
+
+
+
+/***********************************************************************************************************************
+ *
+ *  Security
+ *
+ **********************************************************************************************************************/
 
 /* Prevent unsecure [target='_blank'] links */
 /* By Victor de la Fouchardière */
@@ -162,11 +176,55 @@ a[target='_blank']:not([rel='noopener'], [rel='noreferrer']),
     [rel*="noreferrer"]
 )
 
-/**/
+
+/***********************************************************************************************************************
+ *
+ *  Improvments performance / responsiveness
+ *
+ **********************************************************************************************************************/
+
+/* <img> and <iframe>'s without native lazy loading */
+/* By Jay Holtslander
+img:not([loading="lazy"]),
+iframe:not([loading="lazy"]),
+*/
+
+/* Find <picture> elements that don't contain a webp <source> */
+/* By Jay Holtslander */
+picture > source:first-child:not([type="image/webp"])::before,
+
+/* <img> without height and width that will cause cumulative layout shift. See: https://web.dev/optimize-cls/#images-without-dimensions */
+/* By Jay Holtslander */
+img:not([width]),
+img:not([height]),
+
+/* Not utilizing srcset for responsive images. See: https://html.com/attributes/img-srcset/ */
+/* By Jay Holtslander */
+/* img:not([srcset]), */
 
 markit {
+    content:'';
     display:block;
     outline: 2px dashed red !important;
+    min-width:2rem;
+    min-height:2rem;
+}
+
+
+/***********************************************************************************************************************
+ *
+ *  Using :has() not supported in all browsers. would make the selector invalid if not supported
+ *
+ **********************************************************************************************************************/
+
+head:not(:has(meta[charset])) ,
+head:not(:has(meta[name="viewport"])) ,
+head:not(:has(title)) ,
+
+markit {
+    content:'';
+    display:block;
+    outline: 2px dashed blue !important;
     min-width:2rem;
     min-height:2rem;
 }
