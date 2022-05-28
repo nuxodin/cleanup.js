@@ -1,15 +1,30 @@
 # 🚮 cleanup.js
-Remove old / deprecated stuff in Browsers.
+Cleanup your web application
 
 ## Why?
 
-Test your web application to see if it uses outdated APIs.
+- Warns about deprecated javascript / dom APIs
+- Warns about unconform html
 
 ## Ussage
 
 ```html
 <script src="https://cdn.jsdelivr.net/gh/nuxodin/cleanup.js/mod.min.js"></script>
 ```
+
+### Just want a part of it?
+
+
+Deprecated APIs:
+```html
+<script src="https://cdn.jsdelivr.net/gh/nuxodin/cleanup.js/apis.min.js"></script>
+```
+
+Unconform HTML:
+```html
+<script src="https://cdn.jsdelivr.net/gh/nuxodin/cleanup.js/html.min.js"></script>
+```
+
 
 ## Contribute!
 Have you found an outdated API that is not yet covered?

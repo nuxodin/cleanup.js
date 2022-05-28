@@ -1,4 +1,4 @@
-/* https://github.com/lorenzodelijser/lint-html-with-css */
+/* https://github.com/ffoodd/a11y.css/tree/main/sass/themes */
 
 
 /***********************************************************************************************************************
@@ -8,31 +8,49 @@
  **********************************************************************************************************************/
 
 /* empty makes no sense */
-:is(table,tbody,thead,tfoot,tr,select):empty,
+:is(table,tbody,thead,tfoot,tr,select,title):empty {
+    --cleanup-message:"#tag#" should not be empty;
+    outline: 2px dashed orange !important;
+}
 
 /* required parents */
 :not(figure) > figcaption,
 :not(dl) > :is(dt, dd),
 :not(select) > :is(option, optgroup),
-:not(ul, ol) > li,
+:not(ul, ol) > li {
+    --cleanup-message:"#tag#" has the wrong parent;
+    outline: 2px dashed red !important;
+}
 
 /* allowed children */
-:is(ul, ol, menu) > :not(li,script,template),
+:is(ul, ol, menu) > :not(li,script,template) {
+    --cleanup-message:"#tag#" not allowed as child of "#parent#";
+    outline: 2px dashed red !important;
+}
 
 /* <legend> must be the first child of fieldset */
 fieldset > legend:not(:first-child),
 fieldset > :first-child:not(legend),
-:not(fieldset) > legend,
+:not(fieldset) > legend {
+    --cleanup-message:<legend> must be the first child of <fieldset>;
+    outline: 2px dashed red !important;
+}
 
 /* <summary> must be the first child of details */
 details > :first-child:not(summary),
 details > summary:not(:first-child),
-:not(details) > summary,
+:not(details) > summary {
+    --cleanup-message:<summary> must be the first child of <details>;
+    outline: 2px dashed red !important;
+}
 
 /* <summary> must be the first child of details */
 /* table > :first-child:not(caption),  /* not require but a best practice? */
 table > caption:not(:first-child),
-:not(table) > caption,
+:not(table) > caption {
+    --cleanup-message:<caption> must be the first child of table;
+    outline: 2px dashed red !important;
+}
 
 
 /*
@@ -44,10 +62,16 @@ Phrasing content width exeptions:
 
 /* no block elements inside inline elements */
 :is(a,abbr,acronym,b,bdi,bdo,big,br,cite,code,del,dfn,em,i,ins,kbd,mark,math,nobr,q,rb,rp,rt,rtc,ruby,s,samp,small,span,strong,sub,sup,time,tt,var)
-    > :is(address,article,aside,blockquote,details,dialog,dd,div,dl,dt,fieldset,figcaption,figure,footer,form,h1,h2,h3,h4,h5,h6,header,hgroup,hr,main,menu,nav,ol,p,pre,section,table,ul),
+    > :is(address,article,aside,blockquote,details,dialog,dd,div,dl,dt,fieldset,figcaption,figure,footer,form,h1,h2,h3,h4,h5,h6,header,hgroup,hr,main,menu,nav,ol,p,pre,section,table,ul) {
+    --cleanup-message:block elements inside inline elements;
+    outline: 2px dashed red !important;
+}
 
 /* contains phrasing content */
-:is(p) :not(a,area,del,ins,link,map,meta, abbr,audio,b,bdo,br,button,canvas,cite,code,data,datalist,dfn,em,embed,i,iframe,img,input,kbd,label,mark,math,meter,noscript,object,output,picture,progress,q,ruby,samp,script,select,small,span,strong,sub,sup,svg,textarea,time,u,var,video,wbr),
+:is(p) :not(a,area,del,ins,link,map,meta, abbr,audio,b,bdo,br,button,canvas,cite,code,data,datalist,dfn,em,embed,i,iframe,img,input,kbd,label,mark,math,meter,noscript,object,output,picture,progress,q,ruby,samp,script,select,small,span,strong,sub,sup,svg,textarea,time,u,var,video,wbr) {
+    --cleanup-message:contains phrasing content;
+    outline: 2px dashed red !important;
+}
 
 
 
@@ -59,22 +83,32 @@ Phrasing content width exeptions:
 
  /* Prevents the absence of lang attribute */
 /* By Geoffry Crofte */
-html:not([lang])::before,
+html:not([lang]) {
+    --cleanup-message:lang attribute missing;
+    outline: 2px dashed red !important;
+}
 
 /* Mismatched [dir] && [lang] */
 /* By Adam Argyle */
 [dir="rtl"]:not([lang="ar"], [lang="he"]),
 :is([lang="ar"], [lang="he"]):not([dir="rtl"]),
-:is([lang="ar"], [lang="he"]) [lang]:not([dir="ltr"]),
+:is([lang="ar"], [lang="he"]) [lang]:not([dir="ltr"]) {
+    --cleanup-message:Mismatched [dir] && [lang];
+    outline: 2px dashed orange !important;
+}
 
-/* Links go nowhere? */
-/* By Adam Argyle */
-a:is(:not([href]), [href=""]), /* [href="#"] this is a crossbrowser way to go to top */
+a:is(:not([href]), [href=""]) {
+    --cleanup-message:a has wrong or no href;
+    outline: 2px dashed red !important;
+}
 
 /* this selector hunts for elements with a tabindex other than 0 or -1 */
 /* values other than 0 or -1 can steal or disrupt natural tab order and is generally something to avoid */
 /* By Adam Argyle */
-[tabindex]:not([tabindex="0"],[tabindex="-1"]),
+[tabindex]:not([tabindex="0"],[tabindex="-1"]) {
+    --cleanup-message:'tabindex other than 0 or -1';
+    outline: 2px dashed red !important;
+}
 
 
 /***********************************************************************************************************************
@@ -85,8 +119,14 @@ a:is(:not([href]), [href=""]), /* [href="#"] this is a crossbrowser way to go to
 
 /* deprecated elements */
 
-acronym,applet,basefont,bgsound,big,blink,center,command,content,dir,font,frame,frameset,hgroup,image,keygen,marquee,menuitem,nobr,noembed,noframes,param,plaintext,rb,rtc,shadow,spacer,strike,tt,xmp,
-input:is([type=submit],[type=button],[type=reset]), /* ok, not deprecated but button elements are better */
+acronym,applet,basefont,bgsound,big,blink,center,command,content,dir,font,frame,frameset,hgroup,image,keygen,marquee,menuitem,nobr,noembed,noframes,param,plaintext,rb,rtc,shadow,spacer,strike,tt,xmp {
+    --cleanup-message:#tag# is a deprecated element;
+    outline: 2px dashed red !important;
+}
+input:is([type=submit],[type=button],[type=reset]) {  /* ok, not deprecated but button elements are better */
+    --cleanup-message:input type="submit" or type="button" or type="reset" are not recommended;
+    outline: 2px dashed red !important;
+}
 
 
 /***********************************************************************************************************************
@@ -96,10 +136,13 @@ input:is([type=submit],[type=button],[type=reset]), /* ok, not deprecated but bu
  **********************************************************************************************************************/
 
  /* heading should not be inside a or label elements. See: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/label#headings */
-:is(a,label) :is(h1,h2,h3,h4,h5,h6),
+:is(a,label) :is(h1,h2,h3,h4,h5,h6) {
+    --cleanup-message:'#tag# inside a or label are bad';
+    outline: 2px dashed blue !important;
+}
 
 /* Headers out of order (i.e. h2 before h1, etc.) */
-/* By Una Kravets */
+/* By Una Kravets
 h2 ~ h1,
 h3 ~ h1,
 h4 ~ h1,
@@ -114,7 +157,8 @@ h5 ~ h3:first-of-type,
 h6 ~ h3:first-of-type,
 h5 ~ h4:first-of-type,
 h6 ~ h4:first-of-type,
-h6 ~ h5:first-of-type,
+h6 ~ h5:first-of-type
+*/
 
 
  /***********************************************************************************************************************
@@ -124,38 +168,38 @@ h6 ~ h5:first-of-type,
  **********************************************************************************************************************/
 
 /* Image without alt attribute? */
-img:not([alt]),
+img:not([alt]) {
+    --cleanup-message:<img> without alt attribute;
+    outline: 2px dashed red !important;
+}
 
-/* Empty buttons or links without any kind of labelling */
 /* By Geoffrey Crofte */
 :is(button, a):not([aria-label],[aria-labelledby]):empty,
-:is(button, a):not([aria-label],[aria-labelledby]) > :is(img,svg):only-child:is(:not([alt]),[alt=""]),
+:is(button, a):not([aria-label],[aria-labelledby]) > :is(img,svg):only-child:is(:not([alt]),[alt=""]) {
+    --cleanup-message:Empty buttons or links without any kind of labelling;
+    outline: 2px dashed red !important;
+}
 
 
 /* SVG without focusable=false when decorative or hidden */
 /* By Geoffry Crofte */
-svg:is([role="presentation"], [aria-label], [aria-labelledby], [aria-hidden="true"]):not([focusable="false"]),
+svg:is([role="presentation"], [aria-label], [aria-labelledby], [aria-hidden="true"]):not([focusable="false"]) {
+    --cleanup-message:SVG without focusable=false when decorative or hidden;
+    outline: 2px dashed red !important;
+}
 
 /* SVG without title or aria-label and not considered as decorative */
 /* By Geoffrey Crofte */
-svg:not([role="presentation"],[aria-label],[aria-labelledby]) > :first-child:not(title),
+svg:not([role="presentation"],[aria-label],[aria-labelledby]) > :first-child:not(title) {
+    --cleanup-message:SVG without title or aria-label;
+    outline: 2px dashed red !important;
+}
 
 /* Find all the input fields without any labelling */
-/* By Tanisha Sabherwal */
-:is(input,textarea,select):not(label :is(input,textarea,select), [id], [aria-labelledby], [aria-label]),
-
-
-/* Tables should have a caption */
-/* This one is useful to force each <caption> to be the first direct child of a <table> elements. */
-/* By Quentin Bellanger */
-
-/* Debug inputs and lebels without id or for attribute */
-/* Are you sure your code is ok? Explicit relation between an input and its label is always better. Use id and for attributes to do so. */
-/* By Geoffrey Crofte */
-/* input:not([id]), label:not([for]), */
-
-
-
+:is(input,textarea,select):not(label :is(input,textarea,select), [id], [aria-labelledby], [aria-label]) {
+    --cleanup-message:#tag# without any kind of labelling;
+    outline: 2px dashed red !important;
+}
 
 
 /***********************************************************************************************************************
@@ -164,17 +208,10 @@ svg:not([role="presentation"],[aria-label],[aria-labelledby]) > :first-child:not
  *
  **********************************************************************************************************************/
 
-/* Prevent unsecure [target='_blank'] links */
-/* By Victor de la Fouchardière */
-a[target='_blank']:not([rel='noopener'], [rel='noreferrer']),
-
-/* Unsecure [target=blank] */
-/* By Adam Argyle */
-[target$="blank"]:not(
-    [rel],
-    [rel*="noopener"],
-    [rel*="noreferrer"]
-)
+[target]:not( [rel], [rel*="noopener"], [rel*="noreferrer"]) {
+    --cleanup-message:target without rel="noopener" or rel="noreferrer";
+    outline: 2px dashed red !important;
+}
 
 
 /***********************************************************************************************************************
@@ -191,40 +228,50 @@ iframe:not([loading="lazy"]),
 
 /* Find <picture> elements that don't contain a webp <source> */
 /* By Jay Holtslander */
-picture > source:first-child:not([type="image/webp"])::before,
+picture > source:first-child:not([type="image/webp"])::before {
+    --cleanup-message:<picture> without a webp <source>;
+    outline: 2px dashed blue !important;
+}
 
-/* <img> without height and width that will cause cumulative layout shift. See: https://web.dev/optimize-cls/#images-without-dimensions */
-/* By Jay Holtslander */
-img:not([width]),
-img:not([height]),
-
-/* Not utilizing srcset for responsive images. See: https://html.com/attributes/img-srcset/ */
-/* By Jay Holtslander */
-/* img:not([srcset]), */
-
-markit {
-    content:'';
-    display:block;
-    outline: 2px dashed red !important;
-    min-width:2rem;
-    min-height:2rem;
+img:not([width]) {
+    --cleanup-message:<img> without width;
+    outline: 2px dashed orange !important;
+}
+img:not([height]) {
+    --cleanup-message:<img> without height;
+    outline: 2px dashed orange !important;
 }
 
 
 /***********************************************************************************************************************
  *
- *  Using :has() not supported in all browsers. would make the selector invalid if not supported
+ *  Using :has() not supported in all browsers. Would make the selector invalid if not supported
  *
  **********************************************************************************************************************/
 
-head:not(:has(meta[charset])) ,
-head:not(:has(meta[name="viewport"])) ,
-head:not(:has(title)) ,
 
-markit {
-    content:'';
-    display:block;
-    outline: 2px dashed blue !important;
-    min-width:2rem;
-    min-height:2rem;
+head:not(:has(meta[charset])) {
+    --cleanup-message:'<head> without <meta charset>';
+    outline: 2px dashed red !important;
 }
+head:not(:has(meta[name="viewport"])) {
+    --cleanup-message:'<head> without <meta name="viewport">';
+    outline: 2px dashed red !important;
+}
+head:not(:has(title)) {
+    --cleanup-message:'<head> without <title>';
+    outline: 2px dashed orange !important;
+}
+
+
+/*
+*::after {
+    display:block;
+    font-size:12px;
+    background:#fff;
+    outline:inherit;
+    outline-style: solid;
+    content: var(--cleanup-message);
+    position: absolute;
+}
+*/
