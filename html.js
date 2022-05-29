@@ -9,8 +9,6 @@ document.head.prepend(link);
 
 import { SelectorObserver } from 'https://cdn.jsdelivr.net/gh/u1ui/SelectorObserver.js@2.0.1/SelectorObserver.min.js';
 
-
-
 const colorToConsole = {
     'red': 'error',
     'orange': 'warn',
@@ -28,9 +26,7 @@ link.addEventListener('load', () => {
             on: el => {
                 let elMsg = msg;
                 elMsg = elMsg.replace(/#tag#/, '<'+el.tagName.toLowerCase()+'>');
-                if (el.parentNode.toLowerCase) {
-                    elMsg = elMsg.replace(/#parent#/, '<'+el.parentNode.tagName.toLowerCase()+'>');
-                }
+                if (el.parentNode.toLowerCase) elMsg = elMsg.replace(/#parent#/, '<'+el.parentNode.tagName.toLowerCase()+'>');
                 log('🚮 cleanup.js: ' + elMsg, el);
                 //console.log(rule.selectorText)
             },
