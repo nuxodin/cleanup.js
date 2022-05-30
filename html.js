@@ -3,6 +3,7 @@
 let link = document.createElement('link');
 link.rel = 'stylesheet';
 link.href = import.meta.url + '/../html-lint.css';
+link.setAttribute('crossorigin','');
 document.head.prepend(link);
 
 
