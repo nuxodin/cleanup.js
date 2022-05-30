@@ -180,23 +180,15 @@ img:not([alt]) {
     outline: 2px dashed red !important;
 }
 
-
-/* SVG without focusable=false when decorative or hidden */
-/* By Geoffry Crofte */
-svg:is([role="presentation"], [aria-label], [aria-labelledby], [aria-hidden="true"]):not([focusable="false"]) {
-    --cleanup-message:SVG without focusable=false when decorative or hidden;
-    outline: 2px dashed red !important;
-}
-
 /* SVG without title or aria-label and not considered as decorative */
 /* By Geoffrey Crofte */
-svg:not([role="presentation"],[aria-label],[aria-labelledby]) > :first-child:not(title) {
+svg:not([role="presentation"],[aria-label],[aria-labelledby], [aria-hidden="true"]) > :first-child:not(title) {
     --cleanup-message:SVG without title or aria-label;
     outline: 2px dashed red !important;
 }
 
 /* Find all the input fields without any labelling */
-:is(input,textarea,select):not(label :is(input,textarea,select), [id], [aria-labelledby], [aria-label]) {
+:is(input,textarea,select):not(label :is(input,textarea,select), [id], [aria-labelledby], [aria-label], [aria-hidden="true"]) {
     --cleanup-message:#tag# without any kind of labelling;
     outline: 2px dashed red !important;
 }
