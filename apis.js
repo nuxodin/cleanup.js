@@ -562,6 +562,8 @@ tree.window.CSSStyleDeclaration = {
 };
 */
 
+const reported = new Set();
+
 function check(tree, root){
     for (let prop in tree) {
         if (!(prop in root)) continue;
@@ -569,7 +571,11 @@ function check(tree, root){
             let discriptor = Object.getOwnPropertyDescriptor(root, prop);
             Object.defineProperty(root, prop, {
                 get:function(){
-                    console.error('🚮 cleanup.js: ' + prop + ' should not be used!');
+                    const id = new Error().stack;
+                    if (!reported.has(id)) {
+                        reported.add(id);
+                        console.error('🚮 cleanup.js: ' + prop + ' should not be used!');
+                    }
                     if (discriptor.value) return discriptor.value;
                     return discriptor.get.call(this);
                 },

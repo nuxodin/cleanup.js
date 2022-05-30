@@ -6,13 +6,19 @@
 import './mod.js';
 
 document.all;
-window.captureEvents;
+
+for (var i of [1,2]) { // only report once at a specific position
+    window.captureEvents; // warns first time
+}
+window.captureEvents; // warns again
+
 ''.substr(1);
 document.head.style['-moz-box-direction'];
 document.head.style.MozHyphens;
 document.head.style.WebkitTransform;
 document.head.style['-webkit-mask-position'];
 //document.__proto__; // does not work...!?
+
 
 </script>
 
