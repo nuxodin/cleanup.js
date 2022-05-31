@@ -187,6 +187,7 @@ const tree = {
             cancelBubble:1,
             returnValue:1,
             srcElement:1,
+            //explicitOriginalTarget:1,
         }
     },
     UIEvent:{
