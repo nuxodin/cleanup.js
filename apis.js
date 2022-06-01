@@ -102,6 +102,13 @@ const tree = {
             getPropertyCSSValue:1,
         }
     },
+    CSSStyleSheet: {
+        prototype: {
+            rules:1,
+            addRule:1,
+            removeRule:1,
+        }
+    },
     Document:{
         prototype:{
             alinkColor:1,
