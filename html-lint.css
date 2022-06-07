@@ -61,9 +61,18 @@ Phrasing content width exeptions:
 */
 
 /* no block elements inside inline elements */
-:is(a,abbr,acronym,b,bdi,bdo,big,br,cite,code,del,dfn,em,i,ins,kbd,mark,math,nobr,q,rb,rp,rt,rtc,ruby,s,samp,small,span,strong,sub,sup,time,tt,var)
+:is(abbr,acronym,b,bdi,bdo,big,br,cite,code,del,dfn,em,i,ins,kbd,mark,math,nobr,q,rb,rp,rt,rtc,ruby,s,samp,small,span,strong,sub,sup,time,tt,var)
     > :is(address,article,aside,blockquote,details,dialog,dd,div,dl,dt,fieldset,figcaption,figure,footer,form,h1,h2,h3,h4,h5,h6,header,hgroup,hr,main,menu,nav,ol,p,pre,section,table,ul) {
     --cleanup-message:block elements inside inline elements;
+    outline: 2px dashed red !important;
+}
+
+
+/* interactive content: https://www.w3.org/TR/2011/WD-html5-20110525/content-models.html#interactive-content
+    a,audio[controls],button,details,embed,iframe,img[usemap],input:not([hidden]),keygen,label,menu[type=toolbar],object[usemap],select,textarea,video[controls] */
+/* interactive content inside link */
+a :is(a,audio[controls],button,details,embed,iframe,img[usemap],input:not([hidden]),keygen,label,menu[type=toolbar],object[usemap],select,textarea,video[controls]) {
+    --cleanup-message:interactive elements inside links are not allowed;
     outline: 2px dashed red !important;
 }
 
