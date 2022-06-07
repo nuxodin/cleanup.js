@@ -208,12 +208,12 @@ svg:not([role="presentation"],[aria-label],[aria-labelledby], [aria-hidden="true
  *
  **********************************************************************************************************************/
 
+/* not if intern link (gets me too many false positives)
 [target]:not([rel*="noopener"], [rel*="noreferrer"]) {
-/*    [target]:not( [rel], [rel*="noopener"], [rel*="noreferrer"]) {*/
     --cleanup-message:target without rel="noopener" or rel="noreferrer";
     outline: 2px dashed orange !important;
 }
-
+*/
 
 /***********************************************************************************************************************
  *
