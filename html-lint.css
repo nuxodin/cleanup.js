@@ -196,7 +196,7 @@ svg:not([role="presentation"],[aria-label],[aria-labelledby], [aria-hidden="true
 }
 
 /* Find all the input fields without any labelling */
-:is(input,textarea,select):not(label :is(input,textarea,select),[type=submit],[type=reset],[id],[aria-labelledby],[aria-label],[aria-hidden="true"]) {
+:is(input,textarea,select):not(label :is(input,textarea,select),[type=hidden],[type=button],[type=submit],[type=reset],[id],[aria-labelledby],[aria-label],[aria-hidden="true"]) {
     --cleanup-message:#tag# without any kind of labelling;
     outline: 2px dashed red !important;
 }
