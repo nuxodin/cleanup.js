@@ -47,8 +47,8 @@ const tree = {
         pageYOffset:1,
         webkitURL:1,
         unescape:1,
-        screenX:1,
-        screenY:1,
+        screenLeft:1,
+        screenTop:1,
         sidebar:1,
         webkitRequestAnimationFrame:1,
         webkitCancelAnimationFrame:1,
@@ -239,10 +239,12 @@ const tree = {
     },
     Screen:{
         prototype:{
+            left:1,
             mozLockOrientation:1,
             mozUnlockOrientation:1,
             mozOrientation:1,
             onmozorientationchange:1,
+            top:1,
         }
     },
     SVGMatrix:1,
