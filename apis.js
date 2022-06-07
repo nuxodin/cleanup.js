@@ -13,7 +13,6 @@ const tree = {
         SVGMatrix:1,
         SVGPoint:1,
         SVGPointList:1,
-        MutationEvent:1,
         HTMLMarqueeElement:1,
         HTMLAllCollection:1,
         HTMLDirectoryElement:1,
@@ -163,8 +162,20 @@ const tree = {
             webkitHidden:1,
         }
     },
+    DOMException: {
+        prototype: {
+            code:1,
+        }
+    },
+    DOMError:1,
+    DOMImplementation: {
+        prototype: {
+            hasFeature:1,
+        }
+    },
     Element:{
         prototype:{
+            createShadowRoot:1,
             mozMatchesSelector:1,
             webkitMatchesSelector:1,
             mozRequestFullScreen:1,
@@ -190,6 +201,16 @@ const tree = {
             border:1,
         }
     },
+    MutationEvent: { // whole object is obsolete, but with the properites it can be detected better?
+        prototype: {
+            initMutationEvent:1,
+            attrChange:1,
+            attrName:1,
+            newValue:1,
+            prevValue:1,
+            relatedNode:1,
+        }
+    },
     Navigator:{
         prototype:{
             mozGetUserMedia:1,
@@ -201,6 +222,21 @@ const tree = {
             product:1,
         }
     },
+    Node: {
+        prototype: {
+            isSupported:1,
+        }
+    },
+    NodeIterator:{
+        prototype:{
+            detach:1,
+        }
+    },
+    Range:{
+        prototype:{
+            compareNode:1,
+        }
+    },
     Screen:{
         prototype:{
             mozLockOrientation:1,
@@ -209,6 +245,7 @@ const tree = {
             onmozorientationchange:1,
         }
     },
+    SVGMatrix:1,
     Event:{
         prototype:{
             initEvent:1,
@@ -216,6 +253,11 @@ const tree = {
             returnValue:1,
             srcElement:1,
             //explicitOriginalTarget:1,
+        }
+    },
+    CustomEvent:{
+        prototype:{
+            initCustomEvent:1,
         }
     },
     UIEvent:{
@@ -245,11 +287,6 @@ const tree = {
             wheelDelta:1,
             wheelDeltaX:1,
             wheelDeltaY:1,
-        }
-    },
-    Range:{
-        prototype:{
-            compareNode:1,
         }
     },
     CSS2Properties:{
@@ -603,13 +640,13 @@ function check(tree, root){
                     const id = new Error().stack;
                     if (!reported.has(id)) {
                         reported.add(id);
-                        console.error('🚮 cleanup.js: ' + prop + ' should not be used!');
+                        console.error('🚮 cleanup.js api: ' + prop + ' should not be used!');
                     }
                     if (discriptor.value) return discriptor.value;
                     return discriptor.get.call(this);
                 },
                 set:function(value){
-                    console.error('🚮 cleanup.js: ' + prop + ' should not be used!');
+                    console.error('🚮 cleanup.js api: ' + prop + ' should not be used!');
                     if (discriptor.set) discriptor.set.call(this, value);
                 },
                 enumerable:false,
