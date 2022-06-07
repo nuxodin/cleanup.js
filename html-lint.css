@@ -118,14 +118,13 @@ a:is(:not([href]), [href=""]) {
  **********************************************************************************************************************/
 
 /* deprecated elements */
-
 acronym,applet,basefont,bgsound,big,blink,center,command,content,dir,font,frame,frameset,hgroup,image,keygen,marquee,menuitem,nobr,noembed,noframes,param,plaintext,rb,rtc,shadow,spacer,strike,tt,xmp {
     --cleanup-message:#tag# is a deprecated element;
     outline: 2px dashed red !important;
 }
 input:is([type=submit],[type=button],[type=reset]) {  /* ok, not deprecated but button elements are better */
     --cleanup-message:input type="submit" or type="button" or type="reset" are not recommended;
-    outline: 2px dashed red !important;
+    outline: 2px dashed orange !important;
 }
 
 
@@ -135,8 +134,8 @@ input:is([type=submit],[type=button],[type=reset]) {  /* ok, not deprecated but 
  *
  **********************************************************************************************************************/
 
- /* heading should not be inside a or label elements. See: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/label#headings */
-:is(a,label) :is(h1,h2,h3,h4,h5,h6) {
+ /* heading should not be inside label (and a-element?) elements. See: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/label#headings */
+:is(label) :is(h1,h2,h3,h4,h5,h6) {
     --cleanup-message:'#tag# inside a or label are bad';
     outline: 2px dashed blue !important;
 }
