@@ -26,7 +26,7 @@ Unconform HTML:
 ```
 
 ### Bookmarklet
-Add this to your bookmarks:
+Add this link to your bookmarks:
 ```js
 javascript:(function(){import('https://cdn.jsdelivr.net/gh/nuxodin/cleanup.js/mod.min.js');})();
 ```
