@@ -27,8 +27,8 @@ link.addEventListener('load', () => {
             on: el => {
                 let elMsg = msg;
                 elMsg = elMsg.replace(/#tag#/, '<'+el.tagName.toLowerCase()+'>');
-                if (el.parentNode.toLowerCase) elMsg = elMsg.replace(/#parent#/, '<'+el.parentNode.tagName.toLowerCase()+'>');
-                log('🚮 cleanup.js: ' + elMsg, el);
+                if (el.parentNode.tagName) elMsg = elMsg.replace(/#parent#/, '<'+el.parentNode.tagName.toLowerCase()+'>');
+                log('🚮 cleanup.js html: ' + elMsg, el);
                 //console.log(rule.selectorText)
             },
         });
