@@ -275,7 +275,7 @@ const tree = {
             charCode:1,
             keyCode:1,
             keyIdentifier:1,
-            which:1, // inherited from UIEvent?
+            //which:1, // zzz inherited from UIEvent
             char:1,
         }
     },
@@ -638,6 +638,11 @@ function check(tree, root){
         if (!(prop in root)) continue;
         if (tree[prop] === 1) {
             let discriptor = Object.getOwnPropertyDescriptor(root, prop);
+            if (!discriptor) {
+                console.warn('cleanup.js: discriptor for '+prop+' not defined, is it inherited? please report at https://twitter.com/tobiasbu');
+                continue;
+            }
+
             Object.defineProperty(root, prop, {
                 get:function(){
                     const id = new Error().stack;
