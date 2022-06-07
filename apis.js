@@ -265,6 +265,7 @@ const tree = {
     UIEvent:{
         prototype:{
             initUIEvent:1,
+            which:1,
         }
     },
     KeyboardEvent:{
@@ -274,7 +275,7 @@ const tree = {
             charCode:1,
             keyCode:1,
             keyIdentifier:1,
-            which:1,
+            which:1, // inherited from UIEvent?
             char:1,
         }
     },
