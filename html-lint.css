@@ -69,9 +69,9 @@ Phrasing content width exeptions:
 
 
 /* interactive content: https://www.w3.org/TR/2011/WD-html5-20110525/content-models.html#interactive-content
-    a,audio[controls],button,details,embed,iframe,img[usemap],input:not([hidden]),keygen,label,menu[type=toolbar],object[usemap],select,textarea,video[controls] */
+    a,audio[controls],button,details,embed,iframe,img[usemap],input:not([hidden]),keygen,label,menu[type=toolbar],object[usemap],select,textarea,video[controls],[onclick] */
 /* interactive content inside link */
-a :is(a,audio[controls],button,details,embed,iframe,img[usemap],input:not([hidden]),keygen,label,menu[type=toolbar],object[usemap],select,textarea,video[controls]) {
+a :is(a,audio[controls],button,details,embed,iframe,img[usemap],input:not([hidden]),keygen,label,menu[type=toolbar],object[usemap],select,textarea,video[controls],[onclick]) {
     --cleanup-message:interactive elements inside links are not allowed;
     outline: 2px dashed red !important;
 }
