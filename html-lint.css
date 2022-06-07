@@ -167,7 +167,7 @@ h6 ~ h5:first-of-type
  **********************************************************************************************************************/
 
 /* Image without alt attribute? */
-img:not([alt]) {
+img:not([alt]) { /* [role="presentation"] not as widely supported as using a null alt attribute */
     --cleanup-message:<img> without alt attribute;
     outline: 2px dashed red !important;
 }
@@ -187,7 +187,7 @@ svg:not([role="presentation"],[aria-label],[aria-labelledby], [aria-hidden="true
 }
 
 /* Find all the input fields without any labelling */
-:is(input,textarea,select):not(label :is(input,textarea,select), [id], [aria-labelledby], [aria-label], [aria-hidden="true"]) {
+:is(input,textarea,select):not(label :is(input,textarea,select),[type=submit],[type=reset],[id],[aria-labelledby],[aria-label],[aria-hidden="true"]) {
     --cleanup-message:#tag# without any kind of labelling;
     outline: 2px dashed red !important;
 }
@@ -227,7 +227,7 @@ picture > source:first-child:not([type="image/webp"])::before {
 
 img:not([width]) {
     --cleanup-message:<img> without width;
-    outline: 2px dashed orange !important;
+    outline: 2px dashed blue !important;
 }
 img:not([height]) {
     --cleanup-message:<img> without height;
