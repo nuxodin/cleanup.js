@@ -145,7 +145,7 @@ input:is([type=submit],[type=button],[type=reset]) {  /* ok, not deprecated but 
 
  /* heading should not be inside label (and a-element?) elements. See: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/label#headings */
 :is(label) :is(h1,h2,h3,h4,h5,h6) {
-    --cleanup-message:'#tag# inside a or label are bad';
+    --cleanup-message:'#tag# inside label are bad';
     outline: 2px dashed blue !important;
 }
 
