@@ -194,6 +194,28 @@ const tree = {
             onwebkittransitionend:1,
         }
     },
+    HTMLTableCellElement:{
+        prototype:{
+            align:1,
+            axis:1,
+            bgColor:1,
+            ch:1,
+            chOff:1,
+            height:1,
+            noWrap:1,
+            vAlign:1,
+            width:1,
+        }
+    },
+    HTMLTableColElement:{
+        prototype:{
+            align:1,
+            ch:1,
+            chOff:1,
+            vAlign:1,
+            width:1,
+        }
+    },
     HTMLTableElement:{
         prototype:{
             align:1,
