@@ -15,12 +15,12 @@ Cleanup your web application
 ### Just want a part of it?
 
 
-Deprecated APIs:
+Check for deprecated APIs:
 ```html
 <script src="https://cdn.jsdelivr.net/gh/nuxodin/cleanup.js/apis.min.js"></script>
 ```
 
-Unconform HTML:
+Check for unconform HTML:
 ```html
 <script src="https://cdn.jsdelivr.net/gh/nuxodin/cleanup.js/html.min.js"></script>
 ```
