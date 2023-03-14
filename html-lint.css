@@ -18,7 +18,7 @@
 :not(dl) > :is(dt, dd),
 :not(select, optgroup, datalist) > :is(option),
 :not(select) > :is(optgroup),
-:not(ul, ol) > li {
+:not(ul, ol, menu) > li {
     --cleanup-message:"#tag#" has the wrong parent;
     outline: 2px dashed red !important;
 }
