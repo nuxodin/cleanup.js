@@ -8,7 +8,7 @@ document.head.prepend(link);
 
 
 
-import { SelectorObserver } from 'https://cdn.jsdelivr.net/gh/u1ui/SelectorObserver.js@3.0.1/SelectorObserver.min.js';
+import { SelectorObserver } from 'https://cdn.jsdelivr.net/gh/u1ui/SelectorObserver.js@3.6.0/SelectorObserver.min.js';
 
 const colorToConsole = {
     'red': 'error',
