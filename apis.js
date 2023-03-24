@@ -319,7 +319,6 @@ const tree = {
             MozBoxDirection:1,
             MozBoxAlign:1,
             MozBoxOrient:1,
-            MozBoxOrient:1,
             MozBoxPack:1,
             MozFloatEdge:1,
             MozForceBrokenImageIcon:1,
@@ -656,10 +655,10 @@ tree.window.CSSStyleDeclaration = {
 const reported = new Set();
 
 function check(tree, root){
-    for (let prop in tree) {
+    for (const prop in tree) {
         if (!(prop in root)) continue;
         if (tree[prop] === 1) {
-            let discriptor = Object.getOwnPropertyDescriptor(root, prop);
+            const discriptor = Object.getOwnPropertyDescriptor(root, prop);
             if (!discriptor) {
                 console.warn('cleanup.js: discriptor for '+prop+' not defined, is it inherited? please report at https://twitter.com/tobiasbu');
                 continue;
