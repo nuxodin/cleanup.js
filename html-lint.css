@@ -7,8 +7,9 @@
  *
  **********************************************************************************************************************/
 
-/* empty makes no sense */
-:is(table,tbody,thead,tfoot,tr,select,title):empty {
+
+/* empty makes no sense (exept) */
+:not(td, th, /* void elements: */ area, base, br, col, embed, hr, img, input, link, meta, param, source, track, wbr):empty {
     --cleanup-message:"#tag#" should not be empty;
     outline: 2px dashed orange !important;
 }
@@ -18,8 +19,19 @@
 :not(dl) > :is(dt, dd),
 :not(select, optgroup, datalist) > :is(option),
 :not(select) > :is(optgroup),
-:not(ul, ol, menu) > li {
+:not(ul, ol, menu) > li,
+:not(fieldset) > legend,
+:not(details) > summary,
+:not(:is(picture, audio, video)) > source,
+:not(:is(video, audio)) > track,
+:not(table) > caption {
     --cleanup-message:"#tag#" has the wrong parent;
+    outline: 2px dashed red !important;
+}
+
+/* required ancestors */
+:not(map) area {
+    --cleanup-message:"#tag#" must have an ancestor "<map>";
     outline: 2px dashed red !important;
 }
 
@@ -31,24 +43,21 @@
 
 /* <legend> must be the first child of fieldset */
 fieldset > legend:not(:first-child),
-fieldset > :first-child:not(legend),
-:not(fieldset) > legend {
+fieldset > :first-child:not(legend) {
     --cleanup-message:<legend> must be the first child of <fieldset>;
     outline: 2px dashed red !important;
 }
 
 /* <summary> must be the first child of details */
 details > :first-child:not(summary),
-details > summary:not(:first-child),
-:not(details) > summary {
+details > summary:not(:first-child) {
     --cleanup-message:<summary> must be the first child of <details>;
     outline: 2px dashed red !important;
 }
 
 /* <summary> must be the first child of details */
 /* table > :first-child:not(caption),  /* not require but a best practice? */
-table > caption:not(:first-child),
-:not(table) > caption {
+table > caption:not(:first-child) {
     --cleanup-message:<caption> must be the first child of table;
     outline: 2px dashed red !important;
 }
@@ -150,25 +159,6 @@ input:is([type=submit],[type=button],[type=reset]) {  /* ok, not deprecated but 
     outline: 2px dashed blue !important;
 }
 
-/* Headers out of order (i.e. h2 before h1, etc.) */
-/* By Una Kravets
-h2 ~ h1,
-h3 ~ h1,
-h4 ~ h1,
-h5 ~ h1,
-h6 ~ h1,
-h3 ~ h2:first-of-type,
-h4 ~ h2:first-of-type,
-h5 ~ h2:first-of-type,
-h6 ~ h2:first-of-type,
-h4 ~ h3:first-of-type,
-h5 ~ h3:first-of-type,
-h6 ~ h3:first-of-type,
-h5 ~ h4:first-of-type,
-h6 ~ h4:first-of-type,
-h6 ~ h5:first-of-type
-*/
-
 
  /***********************************************************************************************************************
  *
@@ -230,8 +220,8 @@ iframe:not([loading="lazy"]),
 
 /* Find <picture> elements that don't contain a webp <source> */
 /* By Jay Holtslander */
-picture > source:first-child:not([type="image/webp"])::before {
-    --cleanup-message:<picture> without a webp <source>;
+picture > source:first-child:not([type="image/avif"])::before {
+    --cleanup-message:<picture> without a avif <source>;
     outline: 2px dashed blue !important;
 }
 
@@ -247,7 +237,7 @@ img:not([height]) {
 
 /***********************************************************************************************************************
  *
- *  Using :has() not supported in all browsers. Would make the selector invalid if not supported
+ *  head
  *
  **********************************************************************************************************************/
 

@@ -22,11 +22,55 @@ document.head.style['-webkit-mask-position'];
 
 </script>
 
-<figcaption>test</figcaption>
+
+<h2>shoud not be empty</h2>
+
+<table></table>
+<table>
+    <thead></thead>
+    <tbody></tbody>
+    <tbody><tr></tr></tbody>
+    <tfoot></tfoot>
+</table>
+<select></select>
+<title></title>
+<ul></ul>
+<ol></ol>
+<dl></dl>
+<menu></menu>
+<optgroup></optgroup>
+<audio></audio>
+<video></video>
+<object></object>
+
+
+
+
+
+<h2>required parents</h2>
+
+<figcaption>figcaption not in figure</figcaption>
+<dt>dt not in dl</dt>
+<dd>dd not in dl</dd>
+<option>option not in select, optgroup, datalist</option>
+<optgroup>optgroup not in select</optgroup>
+<li>li not in ul, ol, menu</li>
+<legend>legend not in fieldset</legend>
+<summary>summary not in details</summary>
+<source>source not in audio, video, picture</source>
+<track>track not in audio, video</track>
+<caption>caption not in table</caption>
+
+<h2>required ancestors</h2>
+<area>
+
+
+
+
 <ul>
     <h2>test</h2>
 </ul>
-<font></font>
+<font>font</font>
 <img alt="x" width="20" height="20" loading="lazy">
 <img alt="x" width="20" height="20"               >
 <img alt="x" width="20"             loading="lazy">
@@ -36,7 +80,6 @@ document.head.style['-webkit-mask-position'];
 <button></button>
 <button aria-label="test"></button>
 
-<table></table>
 
 
 <label>
