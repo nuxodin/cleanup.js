@@ -6,7 +6,7 @@
 
 const tree = {
     window:{
-        DOMRequest,
+        DOMRequest:1,
         HTMLMarqueeElement:1,
         HTMLAllCollection:1,
         HTMLDirectoryElement:1,
