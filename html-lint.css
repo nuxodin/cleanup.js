@@ -9,7 +9,7 @@
 
 
 /* empty makes no sense (exept) */
-:not(td, th, /* void elements: */ area, base, br, col, embed, hr, img, input, link, meta, param, source, track, wbr):empty {
+:not(td, th, /* void elements: */ area, base, br, col, embed, hr, img, input, link, meta, param, source, track, wbr, script, path, textarea):empty {
     --cleanup-message:"#tag#" should not be empty;
     outline: 2px dashed orange !important;
 }
