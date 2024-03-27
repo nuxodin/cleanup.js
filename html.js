@@ -25,6 +25,7 @@ link.addEventListener('load', () => {
 
         const sListener = new SelectorObserver({
             on: el => {
+                if (!el.parentNode) return; // no longer connected
                 let elMsg = msg;
                 elMsg = elMsg.replace(/#tag#/, '<'+el.tagName.toLowerCase()+'>');
                 if (el.parentNode.tagName) elMsg = elMsg.replace(/#parent#/, '<'+el.parentNode.tagName.toLowerCase()+'>');

@@ -258,6 +258,7 @@ const tree = {
     Range:{
         prototype:{
             compareNode:1,
+            detach:1,
         }
     },
     Screen:{
