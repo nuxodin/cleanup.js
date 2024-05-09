@@ -9,14 +9,19 @@
 
 
 /* empty makes no sense */
+
 /* (exept) :not(td, th, /* void elements: * / area, base, br, col, embed, hr, img, input, link, meta, param, source, track, wbr, script, path, circle, textarea):empty {
     --cleanup-message:"#tag#" should not be empty;
     outline: 2px dashed orange !important;
 } */
+
+/* 
+too much warnings
 :is(p,a,section,article,aside,header,footer,nav,main,figure,figcaption,blockquote,dd,dt,dl,ol,ul,li,menu,table,tbody,thead,tfoot,tr,td,th,form,fieldset,legend,select,option,button,svg,math,mark,small,strong,em,sub,sup,del,ins,code,samp,kbd,var,cite,abbr,q,dfn,pre,address,h1,h2,h3,h4,h5,h6,object,track,style):empty {
     --cleanup-message:"#tag#" should not be empty;
     outline: 2px dashed orange !important;
 }
+*/
 
 /* required parents */
 :not(figure) > figcaption,
