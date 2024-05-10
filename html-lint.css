@@ -182,8 +182,7 @@ img:not([alt]) { /* [role="presentation"] not as widely supported as using a nul
 }
 
 /* By Geoffrey Crofte */
-:is(button, a):not([aria-label],[aria-labelledby]):empty,
-:is(button, a):not([aria-label],[aria-labelledby]) > :is(img,svg):only-child:is(:not([alt]),[alt=""]) {
+:is(button, a):not([aria-label],[aria-labelledby]):empty {
     --cleanup-message:Empty buttons or links without any kind of labelling;
     outline: 2px dashed red !important;
 }
